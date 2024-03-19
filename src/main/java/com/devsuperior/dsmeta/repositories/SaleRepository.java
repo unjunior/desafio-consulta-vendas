@@ -21,10 +21,10 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 	Page<Sale> searchReportData(String minDate, String maxDate, 
 			String nameSeller, Pageable pageable);
 
-	Page<SaleReportDTO> findSaleReport(LocalDate parse, LocalDate parse2, String name, Pageable pageable);
+	Page<SaleReportDTO> findSaleReport(LocalDate minDate, LocalDate maxDate, String name, Pageable pageable);
 	
 	
-	@Query("SELECT NEW com.devsuperior.dsmeta.dto.SaleSummaryDTO(obj.seller.name, SUM(obj.amount)) " +
+	@Query("SELECT new com.devsuperior.dsmeta.dto.SaleSummaryDTO(obj.seller.name, SUM(obj.amount)) " +
             " FROM Sale obj " +
             "WHERE obj.date BETWEEN :minDate AND :maxDate " +
             "GROUP BY obj.seller.name")

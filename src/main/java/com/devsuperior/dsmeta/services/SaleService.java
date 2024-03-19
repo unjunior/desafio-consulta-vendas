@@ -20,7 +20,7 @@ import com.devsuperior.dsmeta.repositories.SaleRepository;
 @Service
 public class SaleService {
 
-	private LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault()); 
+	private LocalDate atual = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault()); 
 
 	
 	@Autowired
@@ -34,15 +34,15 @@ public class SaleService {
 	
 	
 	public Page<SaleReportDTO> findSaleReport(String minDate, String maxDate, String name, Pageable pageable) {
-		minDate = today.minusYears(1L).toString();
-		maxDate = today.toString();
+		minDate = atual.minusYears(1L).toString();
+		maxDate = atual.toString();
 
         return repository.findSaleReport(LocalDate.parse(minDate), LocalDate.parse(maxDate), name, pageable);
 	}
 	
-	public List<SaleSummaryDTO> findSalesSummaryBySeller(String minDate, String maxDate) {
-		minDate = today.minusYears(1L).toString();
-		maxDate = today.toString();
+	public List<SaleSummaryDTO> findSalesSummary(String minDate, String maxDate) {
+		minDate = atual.minusYears(1L).toString();
+		maxDate = atual.toString();
 
 		return repository.findSumSaleBySeller(LocalDate.parse(minDate), LocalDate.parse(maxDate));
 	}
